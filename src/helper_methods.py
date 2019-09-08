@@ -42,3 +42,10 @@ class SpotifyHelper:
     def create_playlist_with_track_ids(self, playlist_name, track_ids, public=False):
         playlist_id = self.sp.user_playlist_create(self.username, playlist_name, public).get('id')
         self.sp.user_playlist_add_tracks(self.username, playlist_id, track_ids)
+
+    def combine_playlists_into_new_playlist(self, new_playlist_name, old_playlist_ids):
+        track_ids = []
+        for id in old_playlist_ids:
+            track_ids.extend(self.get_playlist_track_ids(id))
+
+        self.create_playlist_with_track_ids(new_playlist_name, track_ids)
