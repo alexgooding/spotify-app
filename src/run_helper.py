@@ -8,4 +8,6 @@ if __name__ == "__main__":
     else:
         spotify_helper = SpotifyHelper()
 
-    spotify_helper.read_saved_tracks()
+    spotify_helper.combine_playlists_into_new_playlist('test playlist', ['5Oa67y8o6NWcNZiI48KuiA',
+                                                                         '7sG7fnq0feVBKVvUodXYeZ',
+                                                                         '37i9dQZEVXbfnGP4aQlJyT'])
