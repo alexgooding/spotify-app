@@ -22,3 +22,19 @@ class SpotifyHelper:
         for item in results['items']:
             track = item['track']
             print(track['name'] + ' - ' + track['artists'][0]['name'])
+
+    def get_playlist_track_ids(self, playlist_id):
+
+        results = self.sp.user_playlist_tracks(self.username, playlist_id)
+        tracks = results['items']
+
+        # Loops to ensure I get every track of the playlist
+        while results['next']:
+            results = self.sp.next(results)
+            tracks.extend(results['items'])
+
+        track_ids = []
+        for track in tracks:
+            track_ids.append(track.get('track').get('id'))
+
+        return track_ids
