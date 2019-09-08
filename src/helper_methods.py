@@ -38,3 +38,7 @@ class SpotifyHelper:
             track_ids.append(track.get('track').get('id'))
 
         return track_ids
+
+    def create_playlist_with_track_ids(self, playlist_name, track_ids, public=False):
+        playlist_id = self.sp.user_playlist_create(self.username, playlist_name, public).get('id')
+        self.sp.user_playlist_add_tracks(self.username, playlist_id, track_ids)
