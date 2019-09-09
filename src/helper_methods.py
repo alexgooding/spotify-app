@@ -49,3 +49,20 @@ class SpotifyHelper:
             track_ids.extend(self.get_playlist_track_ids(id))
 
         self.create_playlist_with_track_ids(new_playlist_name, track_ids)
+
+    def is_track_genre(self, track_id, genre, is_exact_match=True, filter_untagged_artists=False):
+        track_artists = self.sp.track(track_id).get('artists')
+        track_genres = []
+        for artist in track_artists:
+            track_genres.extend(self.sp.artist(artist.get('id')).get('genres'))
+        if filter_untagged_artists:
+            if not track_genres:
+                return True
+        if is_exact_match:
+            if genre in track_genres:
+                return True
+        else:
+            for track_genre in track_genres:
+                if genre in track_genre:
+                    return True
+        return False
