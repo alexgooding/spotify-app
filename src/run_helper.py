@@ -8,6 +8,5 @@ if __name__ == "__main__":
     else:
         spotify_helper = SpotifyHelper()
 
-    spotify_helper.combine_playlists_into_new_playlist('test playlist', ['5Oa67y8o6NWcNZiI48KuiA',
-                                                                         '7sG7fnq0feVBKVvUodXYeZ',
-                                                                         '37i9dQZEVXbfnGP4aQlJyT'])
+    spotify_helper.combine_playlists_into_new_playlist('Release Radar Without Metal', ['37i9dQZEVXbfnGP4aQlJyT'], True,
+                                                       ['metal', 'cyberpunk', 'slayer', 'pixie'], False, True)
