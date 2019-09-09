@@ -50,6 +50,16 @@ class SpotifyHelper:
 
         self.create_playlist_with_track_ids(new_playlist_name, track_ids)
 
+    def filter_tracks(self, track_ids, genre_list, is_exact_match=True, filter_untagged_artists=False):
+        ids_to_remove = []
+        for track_id in track_ids:
+            for genre in genre_list:
+                if self.is_track_genre(track_id, genre, is_exact_match, filter_untagged_artists):
+                    ids_to_remove.append(track_id)
+
+        track_ids = [i for i in track_ids if i not in ids_to_remove]
+        return track_ids
+
     def is_track_genre(self, track_id, genre, is_exact_match=True, filter_untagged_artists=False):
         track_artists = self.sp.track(track_id).get('artists')
         track_genres = []
